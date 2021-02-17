@@ -220,7 +220,6 @@ void GamePlay::onTouchMoved(Touch *touch, Event *pEvent)
         imageArrow->setRotation(-180+_prevAngle);
 
         scale=abs((imageArrow->getContentSize().height+diff)/imageArrow->getContentSize().height);
-        if(scale<3.0f)
             imageArrow->setScaleY(scale*y_scale);
     }
     
