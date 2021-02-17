@@ -21,9 +21,6 @@ public:
     static cocos2d::Scene* createScene();
     Point location,locationBegan;
     
-    void TouchOff();
-    void TouchOn();
-    Node *node;
     
     float _prevAngle,scale,speedOfBall=10;
     bool isBallMoving;

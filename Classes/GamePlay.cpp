@@ -89,7 +89,6 @@ void GamePlay::initPhysics()
 
     b2EdgeShape groundBox;
     
-    // bottom
     groundBox.Set(b2Vec2(0,0), b2Vec2(IPAD_VISIBLE_WIDTH/PTM_RATIO,0));
     groundBody->CreateFixture(&groundBox,0);
     groundBox.Set(b2Vec2(IPAD_VISIBLE_WIDTH/PTM_RATIO,0), b2Vec2(IPAD_VISIBLE_WIDTH/PTM_RATIO,IPAD_VISIBLE_HEIGHT/PTM_RATIO));
@@ -260,6 +259,23 @@ void GamePlay::onTouchCancelled(Touch *touch, Event *pEvent)
     location=Director::getInstance()->convertToGL(location);
     location=this->convertToNodeSpace(location);
     
+    
+    if(imageArrow )
+    {
+       
+        speedOfBall=1000;
+        float x = speedOfBall *imageArrow->getScaleY() * sin(CC_DEGREES_TO_RADIANS(imageArrow->getRotation()));
+        float y = speedOfBall*imageArrow->getScaleY()* cos(CC_DEGREES_TO_RADIANS(imageArrow->getRotation()));
+        bodyHero->ApplyLinearImpulseToCenter(b2Vec2(x,y), true);
+ 
+        isBallMoving=true;
+        imageArrow->removeFromParent();
+        imageArrow=NULL;
+
+    }
+
+    
+        // CCLOG("=====================================");
     CCLOG("Vec2(%2.0f,%2.0f)",location.x,location.y);
     
 }
@@ -268,14 +284,5 @@ void GamePlay::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *eve
     if(EventKeyboard::KeyCode::KEY_ESCAPE==keyCode)
     {
     }
-    
-}
-void GamePlay::TouchOn()
-{
-    _eventDispatcher->setEnabled(true);
-}
-void GamePlay::TouchOff()
-{
-    _eventDispatcher->setEnabled(false);
     
 }
